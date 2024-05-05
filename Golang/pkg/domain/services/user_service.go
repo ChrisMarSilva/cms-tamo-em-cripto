@@ -645,3 +645,694 @@ package services
 //         "id":    user.ID,
 //         "token": token,
 //     })
+
+
+//given
+//when
+//them
+
+
+prometheus.yml
+
+# my global config to replace job without these values
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+
+# Alertmanager configuration
+# alerting:
+#   alertmanagers:
+#     - static_configs:
+#         - targets:
+#           # - alertmanager:9093
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself. Where we define our jobs
+scrape_configs:
+  # prometheus monitoring itself;
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+  
+  - job_name: cadvisor
+    scrape_interval: 5s
+    static_configs:
+    - targets:
+      - cadvisor:8080
+
+  - job_name: goapp
+    scrape_interval: 5s
+    static_configs:
+    - targets:
+      - app:8181
+
+
+docker-compose.yaml
+
+
+version: '3'
+
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    depends_on: 
+      - cadvisor
+    ports:
+      - 9090:9090
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+    # overwrite the prometheus.yml file with our root file
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    container_name: grafana
+    depends_on:
+      - prometheus
+
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    user: root
+    ports:
+    - 8080:8080
+    volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+    - redis
+    
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+    - 6379:6379
+
+  app:
+    build: .
+    container_name: app
+    volumes:
+    - .:/go/src
+    ports:
+    - 8181:8181
+
+
+
+main.go
+
+
+
+package main
+
+import (
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"log"
+	"math/rand"
+	"net/http"
+	"time"
+)
+
+/*
+	Gauge Metric => variable values 1, 100, 4, 23, 17,...
+	This metric will be responsible for check the online users
+*/
+var onlineUsers = prometheus.NewGauge(prometheus.GaugeOpts{
+	Name: "goapp_online_users", // identifier
+	Help: "Online users", // description
+	ConstLabels: map[string]string{
+		"course": "fullcycle", // tags
+	},
+})
+
+/*
+	total of http request that was made, incremental value
+	1 - 10
+	2 - 15 
+	3 - 16
+	from value 1 to 2 was executed 5 requests, from 2 - 3 just one request
+*/
+var httpRequestsTotal = prometheus.NewCounterVec(prometheus.CounterOpts{
+	Name: "goapp_http_requests_total", // identifier 
+	Help: "Count of all HTTP requests for goapp", // description
+}, []string{})
+
+/*
+
+*/
+var httpDuration = prometheus.NewHistogramVec(prometheus.HistogramOpts{
+	Name: "goapp_http_request_duration",
+	Help: "Duration in seconds of all HTTP requests",
+	// handler is the tag we will use on the MustCurryWith function
+}, []string{"handler"})
+
+func main() {
+	r := prometheus.NewRegistry()
+	r.MustRegister(onlineUsers) // registry our metric
+	r.MustRegister(httpRequestsTotal) // registry metric
+	r.MustRegister(httpDuration)
+
+	// this function will be executed in another thread
+	go func() {
+		for {
+			// infinity loop to change the online users all the time from 1 - 2000
+			onlineUsers.Set(float64(rand.Intn(2000)))
+		}
+	}()
+
+	// function to handle the root function
+	home_response := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		time.Sleep(time.Duration(rand.Intn(8))*time.Second) // mock to the page take longer to execute
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("Hello Full Cycle"))
+	})
+
+	contact_response := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		time.Sleep(time.Duration(rand.Intn(5))*time.Second)
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("Contact"))
+	})
+
+
+	// InstrumentHandlerDuration => how long it's taking to execute this function
+	home_with_duration := promhttp.InstrumentHandlerDuration(
+		httpDuration.MustCurryWith(prometheus.Labels{"handler": "home"}),
+		// function to increase the counter on the / page
+		promhttp.InstrumentHandlerCounter(httpRequestsTotal, home_response),
+	)
+
+	contact_with_duration := promhttp.InstrumentHandlerDuration(
+		httpDuration.MustCurryWith(prometheus.Labels{"handler": "contact"}),
+		// function to increase the counter on the /contact page
+		promhttp.InstrumentHandlerCounter(httpRequestsTotal, contact_response),
+	)
+
+
+	http.Handle("/", home_with_duration)
+	http.Handle("/contact", contact_with_duration)
+	http.Handle("/metrics", promhttp.HandlerFor(r, promhttp.HandlerOpts{})) // route where the metrics will be available for prometheus
+	log.Fatal(http.ListenAndServe(":8181", nil)) // initializate app
+}
+
+
+
+
+
+// exeutada por padrao primeiro
+func init() {
+	govalidator.SetFieldsRequiredByDefault(true)
+}
+
+type IProduct interface {
+	IsValid() (bool, error)
+	Enable() error
+	Disable() error
+	GetID() string
+	GetName() string
+	GetStatus() string
+	GetPrice() float64
+}
+
+type IProductService interface {
+	GetById(id string) (IProduct, error)
+	Create(name string, price float64) (IProduct, error)
+	Enable(product IProduct) (IProduct, error)
+	Disable(product IProduct) (IProduct, error) 
+}
+
+type IProductReader interface {
+	GetById(id string) (IProduct, error)
+}
+
+type IProductWriter interface {
+	Save(product IProduct) (IProduct, error)
+}
+
+// composição de interface
+type IProductPersistance interface {
+	IProductReader
+	IProductWriter
+}
+
+
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: categories-api
+    volumes:
+      - ./:/app
+    ports:
+      - 8080:8080
+
+  categories-db:
+    image: postgres:13.1-alpine
+    container_name: categories-db
+    restart: always
+    tty: true
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password123
+      - POSTGRES_DB=meetup
+    volumes:
+      - .docker/db:/var/lib/postgresql/data
+      
+	  
+	  
+	  
+package utils
+
+import (
+	"strconv"
+)
+
+func StringToUint(str string) (i uint, err error) {
+	u64, err := strconv.ParseUint(str, 10, 64)
+
+	if err != nil {
+		return 0, err
+	}
+
+	return uint(u64), nil
+}
+
+
+package database
+
+import (
+	c_models "github.com/GabrielBrotas/go-categories-msvc/internal/categories/models"
+	"gorm.io/gorm"
+)
+
+func MigrateModels(db *gorm.DB) {
+	db.AutoMigrate(&c_models.Category{})
+}
+
+
+
+package database
+
+import (
+	"fmt"
+	"log"
+
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+)
+
+type DBConfig struct {
+	Host     string
+	Port     int
+	User     string
+	DBName   string
+	Password string
+}
+
+func InitDb() (*gorm.DB, error) {
+	config := &DBConfig{
+		Host:     "categories-db",
+		Port:     5432,
+		User:     "postgres",
+		Password: "password123",
+		DBName:   "meetup",
+	}
+
+	connectionString := fmt.Sprintf("host=%s port=%d user=%s dbname=%s password=%s",
+		config.Host, config.Port, config.User, config.DBName, config.Password)
+
+	db, err := gorm.Open(postgres.Open(connectionString), &gorm.Config{})
+
+	if err != nil {
+		log.Println(err)
+		panic("failed to connect database")
+	}
+
+	return db, nil
+}
+
+
+func NewCategory(name string) (*Category, error) {
+	category := &Category{
+		Name:      name,
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+	}
+
+	err := category.IsValid()
+
+	if err != nil {
+		return nil, err
+	}
+
+	return category, nil
+}
+
+func (c *Category) IsValid() error {
+	ec := error_pkg.NewErrorCollection()
+
+	if len(c.Name) < 5 {
+		ec.Add(fmt.Errorf("name must be greater than 5. Got %d", len(c.Name)))
+	}
+
+	if ec.HasErrors() {
+		return ec.Throw()
+	}
+
+	return nil
+}
+
+
+
+package repository
+
+import (
+	"errors"
+
+	c_models "github.com/GabrielBrotas/go-categories-msvc/internal/categories/models"
+	"gorm.io/gorm"
+)
+
+type CategoryRepository struct {
+	db *gorm.DB
+}
+
+func NewCategoryRepository(db *gorm.DB) *CategoryRepository {
+	return &CategoryRepository{db}
+}
+
+func (r *CategoryRepository) FindById(id uint) (*c_models.Category, error) {
+	var category c_models.Category
+	result := r.db.First(&category, id)
+
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
+
+		return nil, result.Error
+	}
+
+	return &category, nil
+}
+
+func (r *CategoryRepository) FindByName(name string) (*c_models.Category, error) {
+	var category c_models.Category
+
+	result := r.db.Where("name = ?", name).First(&category)
+
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
+
+		return nil, result.Error
+	}
+
+	return &category, nil
+}
+
+// TODO: Pagination
+func (r *CategoryRepository) FindAll() ([]*c_models.Category, error) {
+	var categories []*c_models.Category
+	result := r.db.Find(&categories)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return categories, nil
+}
+
+func (r *CategoryRepository) Create(category *c_models.Category) error {
+	result := r.db.Create(category)
+
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}
+
+func (r *CategoryRepository) Update(category *c_models.Category) error {
+	result := r.db.Save(category)
+
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}
+
+func (r *CategoryRepository) Delete(id uint) error {
+	var category c_models.Category
+	result := r.db.First(&category, id)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil
+		}
+		return result.Error
+	}
+	result = r.db.Delete(&category)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
+}
+
+
+package config
+
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
+
+type Config struct {
+	PublicHost              string
+	Port                    string
+	DBUser                  string
+	DBPassword              string
+	DBAddress               string
+	DBName                  string
+	CookiesAuthSecret       string
+	CookiesAuthAgeInSeconds int
+	CookiesAuthIsSecure     bool
+	CookiesAuthIsHttpOnly   bool
+	DiscordClientID         string
+	DiscordClientSecret     string
+	GithubClientID          string
+	GithubClientSecret      string
+}
+
+const (
+	twoDaysInSeconds = 60 * 60 * 24 * 2
+)
+
+var Envs = initConfig()
+
+func initConfig() Config {
+	return Config{
+		PublicHost:              getEnv("PUBLIC_HOST", "http://localhost"),
+		Port:                    getEnv("PORT", "8080"),
+		DBUser:                  getEnv("DB_USER", "root"),
+		DBPassword:              getEnv("DB_PASSWORD", "mypassword"),
+		DBAddress:               fmt.Sprintf("%s:%s", getEnv("DB_HOST", "127.0.0.1"), getEnv("DB_PORT", "3306")),
+		DBName:                  getEnv("DB_NAME", "cars"),
+		CookiesAuthSecret:       getEnv("COOKIES_AUTH_SECRET", "some-very-secret-key"),
+		CookiesAuthAgeInSeconds: getEnvAsInt("COOKIES_AUTH_AGE_IN_SECONDS", twoDaysInSeconds),
+		CookiesAuthIsSecure:     getEnvAsBool("COOKIES_AUTH_IS_SECURE", false),
+		CookiesAuthIsHttpOnly:   getEnvAsBool("COOKIES_AUTH_IS_HTTP_ONLY", false),
+		DiscordClientID:         getEnvOrError("DISCORD_CLIENT_ID"),
+		DiscordClientSecret:     getEnvOrError("DISCORD_CLIENT_SECRET"),
+		GithubClientID:          getEnvOrError("GITHUB_CLIENT_ID"),
+		GithubClientSecret:      getEnvOrError("GITHUB_CLIENT_SECRET"),
+	}
+}
+
+func getEnv(key, fallback string) string {
+	if value, ok := os.LookupEnv(key); ok {
+		return value
+	}
+
+	return fallback
+}
+
+func getEnvOrError(key string) string {
+	if value, ok := os.LookupEnv(key); ok {
+		return value
+	}
+
+	panic(fmt.Sprintf("Environment variable %s is not set", key))
+
+}
+
+func getEnvAsInt(key string, fallback int) int {
+	if value, ok := os.LookupEnv(key); ok {
+		i, err := strconv.Atoi(value)
+		if err != nil {
+			return fallback
+		}
+
+		return i
+	}
+
+	return fallback
+}
+
+func getEnvAsBool(key string, fallback bool) bool {
+	if value, ok := os.LookupEnv(key); ok {
+		b, err := strconv.ParseBool(value)
+		if err != nil {
+			return fallback
+		}
+
+		return b
+	}
+
+	return fallback
+}
+
+
+
+package auth
+
+import "github.com/gorilla/sessions"
+
+const (
+	SessionName = "session"
+)
+
+type SessionOptions struct {
+	CookiesKey string
+	MaxAge     int
+	HttpOnly   bool // Should be true if the site is served over HTTP (development environment)
+	Secure     bool // Should be true if the site is served over HTTPS (production environment)
+}
+
+func NewCookieStore(opts SessionOptions) *sessions.CookieStore {
+	store := sessions.NewCookieStore([]byte(opts.CookiesKey))
+
+	store.MaxAge(opts.MaxAge)
+	store.Options.Path = "/"
+	store.Options.HttpOnly = opts.HttpOnly
+	store.Options.Secure = opts.Secure
+
+	return store
+}
+
+
+
+package auth
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+
+	"github.com/gorilla/sessions"
+	"github.com/markbates/goth"
+	"github.com/markbates/goth/gothic"
+	"github.com/markbates/goth/providers/discord"
+	"github.com/markbates/goth/providers/github"
+	"github.com/sikozonpc/fullstackgo/config"
+)
+
+type AuthService struct{}
+
+func NewAuthService(store sessions.Store) *AuthService {
+	gothic.Store = store
+
+	goth.UseProviders(
+		github.New(
+			config.Envs.GithubClientID,
+			config.Envs.GithubClientID,
+			buildCallbackURL("github"),
+		),
+		discord.New(
+			config.Envs.DiscordClientID,
+			config.Envs.DiscordClientSecret,
+			buildCallbackURL("discord"),
+		),
+	)
+
+	return &AuthService{}
+}
+
+func (s *AuthService) GetSessionUser(r *http.Request) (goth.User, error) {
+	session, err := gothic.Store.Get(r, SessionName)
+	if err != nil {
+		return goth.User{}, err
+	}
+
+	u := session.Values["user"]
+	if u == nil {
+		return goth.User{}, fmt.Errorf("user is not authenticated! %v", u)
+	}
+
+	return u.(goth.User), nil
+}
+
+func (s *AuthService) StoreUserSession(w http.ResponseWriter, r *http.Request, user goth.User) error {
+	// Get a session. We're ignoring the error resulted from decoding an
+	// existing session: Get() always returns a session, even if empty.
+	session, _ := gothic.Store.Get(r, SessionName)
+
+	session.Values["user"] = user
+
+	err := session.Save(r, w)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return err
+	}
+
+	return nil
+}
+
+func (s *AuthService) RemoveUserSession(w http.ResponseWriter, r *http.Request) {
+	session, err := gothic.Store.Get(r, SessionName)
+	if err != nil {
+		log.Println(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	session.Values["user"] = goth.User{}
+	// delete the cookie immediately
+	session.Options.MaxAge = -1
+
+	session.Save(r, w)
+}
+
+func RequireAuth(handlerFunc http.HandlerFunc, auth *AuthService) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		session, err := auth.GetSessionUser(r)
+		if err != nil {
+			log.Println("User is not authenticated!")
+			http.Redirect(w, r, "/login", http.StatusTemporaryRedirect)
+			return
+		}
+
+		log.Printf("user is authenticated! user: %v!", session.FirstName)
+
+		handlerFunc(w, r)
+	}
+}
+
+func buildCallbackURL(provider string) string {
+	return fmt.Sprintf("%s:%s/auth/%s/callback", config.Envs.PublicHost, config.Envs.Port, provider)
+}
