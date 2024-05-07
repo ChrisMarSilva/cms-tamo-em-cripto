@@ -3,12 +3,19 @@ import { cookies } from 'next/headers'
 import { verifySession, updateSession } from '@/lib/actions/session'
 //import { getUserMe } from "@/lib/services/user-service"
 
+// 1. Specify protected and public routes
+const protectedRoutes = [
+  '/dashboard',
+  'Produto',
+]
+
+const publicRoutes = [ 
+  '/',
+  '/signup',
+  '/signin',
+]
+
 export default async function middleware(req: NextRequest) {
-
-    // 1. Specify protected and public routes
-  const protectedRoutes = ['/dashboard']
-  const publicRoutes = [ '/','/signup','/signin']
-
   // 2. Check if the current route is protected or public
   const path = req.nextUrl.pathname
   const isProtectedRoute = protectedRoutes.includes(path)

@@ -1,30 +1,23 @@
-'use server'
+"use server";
 
-// import api from "./api"
-import { getSession } from "@/lib/actions/session"
-
-const baseURL = process.env.NEXT_URL
+import api from "./api-service";
+//import { getSession } from "@/lib/actions/session";
 
 export async function getUserMe() {
-    try {
-        const session = await getSession()
-        if (!session) return { ok: false, data: null, error: null }
+  try {
+    //const session = await getSession();
+    //if (!session) return { ok: false, data: null, error: null };
 
-        const url = new URL("auth/profile", baseURL)
+    // const config = { withCredentials: true,  headers: { Authorization: `Bearer ${session.token}` }, };
+    const response = await api.get("auth/profile");
 
-        const response = await fetch(url.href, {
-            method: "GET",
-            headers: { "Content-Type": "application/json", Authorization: `Bearer ${session}`},
-            cache: "no-cache",
-        })
+    const data = await response.data;
+    if (!data) return { ok: false, data: null, error: "Erro geral" };
+    if (data.error) return { ok: false, data: null, error: data.error };
 
-        const data = await response.json()
-        if (!data) return { ok: false, data: null, error: "Erro geral" }
-        if (data.error) return { ok: false, data: null, error: data.error }
-
-        return { ok: true, data: data, error: null }
-    } catch (error) {
-        console.log(error)
-        return { ok: false, data: null, error: error }
-    }
+    return { ok: true, data: data, error: null };
+  } catch (error) {
+    console.log(error);
+    return { ok: false, data: null, error: error };
+  }
 }
