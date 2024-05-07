@@ -750,7 +750,6 @@ yarn-debug.log*
 yarn-error.log*
 
 
-
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -771,18 +770,7 @@ yarn-error.log*
 *RET.TXT
 
 *.dcu
-
-/cms.golang.jd
 .env
-cms.golang.teste.arquivos/cms.golang.teste.arquivos.viper/.env
-cms.golang.tnb/cms.golang.tnb.yahoo.cotacao/.env
-cms.golang.tnb/cms.golang.tnb.yahoo.cotacao/.env
-cms.golang.teste.api/cms.golang.teste.api.chi/data
-cms.golang.teste.messageria/cms.golang.teste.rabittmq.grafana.prometheus/grafana/data
-cms.golang.teste.messageria/cms.golang.teste.rabittmq.grafana.prometheus/mysql
-cms.golang.teste.messageria/cms.golang.teste.rabittmq.grafana.prometheus/prometheus/data
-cms.golang.teste.messageria/cms.golang.teste.rabittmq.grafana.prometheus/rabbitmq
-cms.golang.teste.api/rinha-backend-2024/data
 
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
