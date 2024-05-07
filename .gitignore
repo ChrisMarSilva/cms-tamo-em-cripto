@@ -809,3 +809,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# geral
+/cms-tamo-em-cripto-site/.next
+/cms-tamo-em-cripto-site/.next/cache
+/cms-tamo-em-cripto-site/.next/cache/webpack
+/cms-tamo-em-cripto-site/.next/cache/webpack/client-development
+*.gz
