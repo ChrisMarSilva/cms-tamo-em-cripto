@@ -2,57 +2,79 @@
   "node": {
     "5e3a4162e6bf4678df41a41c15febd55f8f7df0a": {
       "workers": {
-        "app/dashboard/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!",
+        "app/(dashboard)/dashboard/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!",
         "app/(auth)/signin/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%5D&__client_imported__=true!",
-        "app/(auth)/signup/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/orders/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!",
+        "app/(dashboard)/produto/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!"
       },
       "layer": {
-        "app/dashboard/page": "rsc",
+        "app/(dashboard)/dashboard/page": "rsc",
         "app/(auth)/signin/page": "action-browser",
-        "app/(auth)/signup/page": "action-browser"
+        "app/(dashboard)/orders/page": "rsc",
+        "app/(dashboard)/produto/page": "rsc"
       }
     },
     "80258f3194b3b0d3575812c8902d86edad5190b7": {
       "workers": {
-        "app/dashboard/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!",
+        "app/(dashboard)/dashboard/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!",
         "app/(auth)/signin/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%5D&__client_imported__=true!",
-        "app/(auth)/signup/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/orders/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!",
+        "app/(dashboard)/produto/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!"
       },
       "layer": {
-        "app/dashboard/page": "rsc",
+        "app/(dashboard)/dashboard/page": "rsc",
         "app/(auth)/signin/page": "action-browser",
-        "app/(auth)/signup/page": "action-browser"
+        "app/(dashboard)/orders/page": "rsc",
+        "app/(dashboard)/produto/page": "rsc"
       }
     },
     "92a0695f4ef4c75d5b918b88529ea1faae4ae993": {
       "workers": {
-        "app/dashboard/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!",
+        "app/(dashboard)/dashboard/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!",
         "app/(auth)/signin/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%5D&__client_imported__=true!",
-        "app/(auth)/signup/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/orders/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!",
+        "app/(dashboard)/produto/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!"
       },
       "layer": {
-        "app/dashboard/page": "rsc",
+        "app/(dashboard)/dashboard/page": "rsc",
         "app/(auth)/signin/page": "action-browser",
-        "app/(auth)/signup/page": "action-browser"
+        "app/(dashboard)/orders/page": "rsc",
+        "app/(dashboard)/produto/page": "rsc"
       }
     },
     "09eaca6e9b917396ecb82390a3eb40cbd4ad1206": {
       "workers": {
-        "app/dashboard/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!"
+        "app/(dashboard)/dashboard/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!",
+        "app/(dashboard)/orders/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!",
+        "app/(dashboard)/produto/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!"
       },
       "layer": {
-        "app/dashboard/page": "rsc"
+        "app/(dashboard)/dashboard/page": "rsc",
+        "app/(dashboard)/orders/page": "rsc",
+        "app/(dashboard)/produto/page": "rsc"
       }
     },
     "168efa33b9cecbc92607c1aff0a621d5872b8a88": {
       "workers": {
-        "app/dashboard/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!"
+        "app/(dashboard)/dashboard/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!",
+        "app/(dashboard)/orders/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!",
+        "app/(dashboard)/produto/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!"
       },
       "layer": {
-        "app/dashboard/page": "rsc"
+        "app/(dashboard)/dashboard/page": "rsc",
+        "app/(dashboard)/orders/page": "rsc",
+        "app/(dashboard)/produto/page": "rsc"
+      }
+    },
+    "306cf22b0f07417be21c428a19190438ab537b1b": {
+      "workers": {
+        "app/(dashboard)/dashboard/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cactions%5C%5Cauth-actions.ts%22%2C%5B%22registerUserAction%22%2C%22loginUserAction%22%2C%22logoutAction%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5Cchris%5C%5CDesktop%5C%5CCMS%20Tamo%20em%20Cripto%5C%5Ccms-tamo-em-cripto-site%5C%5Csrc%5C%5Clib%5C%5Cservices%5C%5Cauth-service.ts%22%2C%5B%22registerUserService%22%2C%22loginUserService%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/(dashboard)/dashboard/page": "rsc"
       }
     }
   },
   "edge": {},
-  "encryptionKey": "5YHrzjQAhU/kZIuvlCdogBCoGjaadZFvhoH4Vqo/3HM="
+  "encryptionKey": "9dx1u+dSLA00V251KuN8Aqo17AtIl+zp0MTSG9fCuxs="
 }
