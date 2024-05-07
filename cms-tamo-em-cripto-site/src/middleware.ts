@@ -1,51 +1,37 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { getUserMeLoader } from "@/data/services/get-user-me-loader";
-//import { cookies } from 'next/headers'
+import { NextRequest, NextResponse } from 'next/server'
+import { cookies } from 'next/headers'
+import { verifySession, updateSession } from '@/lib/actions/session'
+//import { getUserMe } from "@/lib/services/user-service"
 
-// const protectedRoutes = ['/dashboard']
-// const publicRoutes = ['/', '/signin', '/signup', '/favicon.ico']
+export default async function middleware(req: NextRequest) {
 
-export default async function middleware(request: NextRequest) {
-    // const path = request.nextUrl.pathname
-    // const isProtectedRoute = protectedRoutes.includes(path)
-    // const isPublicRoute = publicRoutes.includes(path)
-    
-    // const cookie = cookies().get('session')?.value
-    // const session = null //const session = await decrypt(cookie)
+    // 1. Specify protected and public routes
+  const protectedRoutes = ['/dashboard']
+  const publicRoutes = [ '/','/signup','/signin']
 
-    // // Redirect to /signin if the user is not authenticated
-    // if (isProtectedRoute && !session?.userId) 
-    //     return NextResponse.redirect(new URL('/signin', request.nextUrl))
+  // 2. Check if the current route is protected or public
+  const path = req.nextUrl.pathname
+  const isProtectedRoute = protectedRoutes.includes(path)
+  const isPublicRoute = publicRoutes.includes(path)
 
-    // // Redirect to /dashboard if the user is authenticated
-    // if (isPublicRoute && session?.userId && !request.nextUrl.pathname.startsWith('/dashboard')) 
-    //     return NextResponse.redirect(new URL('/dashboard', request.nextUrl))
+  // 3. Decrypt the session from the cookie
+  const session = await verifySession() // getSession
 
-    const user = await getUserMeLoader();
-    //console.log('middleware', user);
-    const currentPath = request.nextUrl.pathname;
+  // 5. Redirect to /signin if the user is not authenticated
+  if (isProtectedRoute && !session?.token) return NextResponse.redirect(new URL('/signin', req.nextUrl))
 
-    if (currentPath.startsWith("/dashboard") && user.ok === false) {
-        return NextResponse.redirect(new URL("/signin", request.url));
-    }
+  // 6. Redirect to /dashboard if the user is authenticated
+  if (isPublicRoute && session?.token && !req.nextUrl.pathname.startsWith('/dashboard')) return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
 
-    return NextResponse.next()
+  // const user = await getUserMe()
+  // const currentPath = request.nextUrl.pathname
+  // if (currentPath.startsWith("/dashboard") && user.ok === false) return NextResponse.redirect(new URL("/signin", request.url))
+
+  return await updateSession(req)
+  //return NextResponse.next()
 }
 
+// Routes Middleware should not run on
 export const config = {
-    //matcher: '/about/:path*',
-    matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
-    // matcher: [
-    //     {
-    //     source: '/api/*',
-    //     regexp: '^/api/(.*)',
-    //     locale: false,
-    //     has: [
-    //         { type: 'header', key: 'Authorization', value: 'Bearer Token' },
-    //         { type: 'query', key: 'userId', value: '123' },
-    //     ],
-    //     missing: [{ type: 'cookie', key: 'session', value: 'active' }],
-    //     },
-    // ],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\.png$).*)'],
 }

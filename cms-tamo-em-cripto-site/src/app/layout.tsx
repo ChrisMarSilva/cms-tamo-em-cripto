@@ -1,25 +1,21 @@
-import type { Metadata } from "next"
-import { Inter as FontSans } from "next/font/google"
-import "./globals.css"
-import { cn } from "@/lib/utils"
-import { ThemeProvider} from 'next-themes'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
 
-//const inter = Inter({ subsets: ["latin"] })
-const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "CMS Tamo em Cripto",
   description: "Site para organizar as Criptos",
-}
+};
 
 export default function RootLayout({children}: Readonly<{children: React.ReactNode}>) {
+  // const user = await getUser();
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
-      <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable )}>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+    <html lang="pt-BR">
+      <body className="min-h-screen bg-background font-sans antialiased">
+        {children}
       </body>
     </html>
-  )
+  );
 }

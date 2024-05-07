@@ -1,9 +1,5 @@
-import { SignupForm } from "@/components/forms/signup-form"
+import { SignupForm } from "./signup-form"
 
-export default function SingUp() {
-  return (
-    <>
-      <SignupForm />
-    </>
-  )
+export default async function SingUp() {
+  return <SignupForm />
 }

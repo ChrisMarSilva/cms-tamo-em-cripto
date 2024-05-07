@@ -1,5 +1,5 @@
-import { SigninForm } from "@/components/forms/signin-form";
+import { SigninForm } from "./signin-form"
 
-export default function SignIn() {
+export default async function SignIn() {
   return <SigninForm />
 }
