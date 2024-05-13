@@ -1,0 +1,45 @@
+###
+GET http://localhost:3000/comments
+
+###
+GET http://localhost:3000/profile
+
+###
+GET http://localhost:3000/posts
+
+###
+GET http://localhost:3000/posts/2
+
+###
+POST http://localhost:3000/posts HTTP/1.1
+content-type: application/json
+
+{
+    "id": "3",
+    "title": "a title 3",
+    "views": 333
+}
+
+###
+PUT http://localhost:3000/posts/3 HTTP/1.1
+content-type: application/json
+
+{
+    "id": "3",
+    "title": "another title",
+    "views": 350
+}
+
+
+###
+PATCH http://localhost:3000/posts/3 HTTP/1.1
+content-type: application/json
+
+{
+    "views": 370
+}
+
+
+###
+DELETE http://localhost:3000/posts/3 HTTP/1.1
+

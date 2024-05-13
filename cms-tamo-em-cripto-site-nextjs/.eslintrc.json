@@ -1,0 +1,31 @@
+{
+	"env": {
+		"commonjs": true,
+		"browser": true,
+		"es2021": true
+	},
+	"extends": [
+		"next",
+		//"next/core-web-vitals",
+		//"standard",
+		//"plugin:@tanstack/eslint-plugin-query/recommended",
+		"@tanstack/query",
+		"prettier"
+	],
+	"parserOptions": {
+		"ecmaVersion": "latest"
+	},
+	"rules": {
+		"@tanstack/query/exhaustive-deps": "error",
+		"@tanstack/query/no-rest-destructuring": "warn",
+		"@tanstack/query/stable-query-client": "error"
+		// "prefer-const": "error", // "off"
+		// "@typescript-eslint/explicit-function-return-type": "off",
+		// "@typescript-eslint/no-explicit-any": "error", // "off",
+		// "@typescript-eslint/no-var-requires": "off",
+		// "@typescript-eslint/no-use-before-define": "off",
+		// "@typescript-eslint/no-unused-vars": "error", // "off",
+		// "@typescript-eslint/interface-name-prefix": "off"
+	}
+	//"ignorePatterns": ["dist/**/*"]
+}
