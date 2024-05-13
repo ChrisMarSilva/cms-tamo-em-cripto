@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/htmx.js" integrity="sha384-qbtR4rS9RrUMECUWDWM2+YGgN3U4V4ZncZ0BvUcg9FGct0jqXz3PUdVpU1p0yrXS" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>home: {{date}}</h1>
+
+    <section class="section">
+      <div class="columns">
+        <div class="column is-one-third is-offset-one-third">
+          <input type="text" class="input" placeholder="Search" name="q" hx-get="/search" hx-trigger="keyup changed delay:100ms" hx-target="#results">
+        </div>
+      </div>
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Performer</th>
+            <th>Peak Position</th>
+            <th>Time on Chart</th>
+            <th>Chart Debut</th>
+          </tr>
+        </thead>
+        <tbody id="results" hx-get="/search" hx-trigger="load delay:100ms" hx-swap="outerHTML">
+        </tbody>
+      </table>
+    </section>
+
+</body>
+</html>

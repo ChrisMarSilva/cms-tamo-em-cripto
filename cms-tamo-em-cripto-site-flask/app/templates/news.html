@@ -1,0 +1,62 @@
+<h1>news: {{date}}</h1>
+
+
+
+    <div hx-get="/news" hx-trigger="every 2s"></div>
+    <div hx-get="/messages" hx-trigger="load delay:1s" hx-swap="outerHTML"> </div>
+
+
+    <input type="text" name="q"
+        hx-get="/trigger_delay"
+        hx-trigger="keyup delay:500ms changed"
+        hx-target="#search-results"
+        placeholder="Search..."
+    >
+    <div id="search-results"></div>
+
+<button hx-delete="/account" hx-confirm="Are you sure you wish to delete your account?">
+    Delete My Account
+</button>
+
+<button hx-delete="/account" hx-confirm="Are you sure?">
+    Delete My Account
+</button>
+<button hx-put="/account" hx-confirm="Are you sure?">
+    Update My Account
+</button>
+
+
+<div hx-confirm="Are you sure?">
+    <button hx-delete="/account">
+        Delete My Account
+    </button>
+    <button hx-put="/account">
+        Update My Account
+    </button>
+</div>
+
+
+<div hx-confirm="Are you sure?">
+    <button hx-delete="/account">
+        Delete My Account
+    </button>
+    <button hx-put="/account">
+        Update My Account
+    </button>
+    <button hx-confirm="unset" hx-get="/">
+        Cancel
+    </button>
+</div>
+
+<div hx-boost="true">
+    <a href="/blog">Blog</a>
+</div>
+
+<form action="/search" method="POST">
+    <input class="form-control" type="search"
+        name="search" placeholder="Begin typing to search users..."
+        hx-post="/search"
+        hx-trigger="keyup changed delay:500ms, search"
+        hx-target="#search-results"
+        hx-indicator=".htmx-indicator">
+</form>

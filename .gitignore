@@ -891,3 +891,5 @@ cms-tamo-em-cripto-site/.next/cache/webpack/client-development-fallback/index.pa
 cms-tamo-em-cripto-site/.next/cache/webpack/client-development-fallback/index.pack.gz
 cms-tamo-em-cripto-site/.next/cache/webpack/client-development-fallback/0.pack.gz
 cms-tamo-em-cripto-site/.next/app-build-manifest.json
+/cms-tamo-em-cripto-site-nextjs/.next/static/webpack
+/cms-tamo-em-cripto-site/.next/cache/webpack/server-development
