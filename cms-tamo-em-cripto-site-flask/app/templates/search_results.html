@@ -1,12 +1,12 @@
 {% if results is not none %}
 {% for result in results %}
 <tr>
-    <td>{{ result.id }}</td>
-    <td>{{ result.title }}</td>
-    <td>{{ result.performer }}</td>
-    <td>{{ result.peak_position }}</td>
-    <td>{{ result.time_on_chart }}</td>
-    <td>{{ result.chart_debut }}</td>
+    <td class="border">{{ result.id }}</td>
+    <td class="border">{{ result.title }}</td>
+    <td class="border">{{ result.performer }}</td>
+    <td class="border">{{ result.peak_position }}</td>
+    <td class="border">{{ result.time_on_chart }}</td>
+    <td class="border">{{ result.chart_debut }}</td>
 </tr>
 {% endfor %}
 {% endif %}

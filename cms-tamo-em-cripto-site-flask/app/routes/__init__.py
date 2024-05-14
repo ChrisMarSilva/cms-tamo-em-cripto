@@ -1,5 +1,6 @@
+from . import home
+from . import carteira
 
 def init_app(app):
-    from . import home
     app.register_blueprint(home.main)
-
+    app.register_blueprint(carteira.main)

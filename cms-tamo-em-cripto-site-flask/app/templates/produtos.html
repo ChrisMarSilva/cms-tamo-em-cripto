@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block subtitulo %} - Home {% endblock %}
+
+{% block styles %}
+<!--    <link type="text/css" rel="stylesheet" href="{{ static_autoversion('pages/css/PagAdmin.css') }}" />-->
+{% endblock %}
+
+{% block content %}
+    <h1>home: {{date}}</h1>
+    <section class="section">
+      <div class="columns">
+        <div class="column is-one-third is-offset-one-third">
+          <input type="text" class="input" placeholder="Search" name="q" hx-get="/search" hx-trigger="keyup changed delay:100ms" hx-target="#results">
+        </div>
+      </div>
+      <table class="min-w-[50%] mb-4">
+        <thead class="border-b text-lg">
+          <tr>
+            <th class="border">ID</th>
+            <th class="border">Title</th>
+            <th class="border">Performer</th>
+            <th class="border">Peak Position</th>
+            <th class="border">Time on Chart</th>
+            <th class="border">Chart Debut</th>
+          </tr>
+        </thead>
+        <tbody id="results" hx-get="/search" hx-trigger="load delay:100ms" hx-swap="outerHTML" class="text-center text-sm"
+        </tbody>
+      </table>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+<!--	<script src="{{ static_autoversion('pages/js/PagAdmin.js') }}"></script>-->
+{% endblock %}
